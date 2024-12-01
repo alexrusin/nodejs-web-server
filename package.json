@@ -1,0 +1,18 @@
+{
+  "name": "web-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc-watch --onsuccess \"node dist/server.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^22.10.1",
+    "tsc-watch": "^6.2.1",
+    "typescript": "^5.7.2"
+  }
+}
