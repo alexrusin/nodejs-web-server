@@ -1,27 +1,18 @@
-import { IncomingMessage, ServerResponse } from "http";
-export const handler = async (req: IncomingMessage, res: ServerResponse) => {
-  console.log(`---- HTTP Method: ${req.method}, URL: ${req.url}`);
-  console.log(`host: ${req.headers.host}`);
+import { Request, Response } from "express";
 
-  const parsedURL = new URL(req.url ?? "", `http://${req.headers.host}`);
-  console.log(`protocol: ${parsedURL.protocol}`);
-  console.log(`hostname: ${parsedURL.hostname}`);
-  console.log(`port: ${parsedURL.port}`);
-  console.log(`pathname: ${parsedURL.pathname}`);
-  parsedURL.searchParams.forEach((val, key) => {
-    console.log(`Search param: ${key}: ${val}`);
-  });
+export const notFoundHandler = (req: Request, res: Response) => {
+  res.sendStatus(404);
+};
 
-  if (req.method !== "GET" || parsedURL.pathname == "/favicon.ico") {
-    res.writeHead(404, "Not Found");
+export const newUrlHandler = (req: Request, res: Response) => {
+  const message = req.params.message ?? "(No Message)";
+  res.send(`Hello, ${message}`);
+};
+
+export const defaultHandler = (req: Request, res: Response) => {
+  if (req.query.keyword) {
+    res.send(`Hello, ${req.query.keyword}`);
   } else {
-    res.writeHead(200, "OK");
-    if (!parsedURL.searchParams.has("keyword")) {
-      res.write("Hello, HTTP");
-    } else {
-      res.write(`Hello, ${parsedURL.searchParams.get("keyword")}`);
-    }
+    res.send(`Hello, ${req.protocol.toUpperCase()}`);
   }
-
-  res.end();
 };

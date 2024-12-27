@@ -12,7 +12,12 @@
   "dependencies": {
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^22.10.1",
+    "bootstrap": "^5.3.3",
+    "express": "^4.21.2",
     "tsc-watch": "^6.2.1",
     "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0"
   }
 }
